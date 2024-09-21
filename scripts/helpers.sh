@@ -83,7 +83,7 @@ send_notification() {
 			pause | break)
 				notify-send -t 8000 "$title" "$message"
 				if [[ "$sound" == "on" ]]; then
-					cmus-remote -u
+					cmus-remote -U
 				fi
 				;;
 			cancel)
