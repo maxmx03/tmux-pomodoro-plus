@@ -232,7 +232,7 @@ pomodoro_toggle() {
 
 pomodoro_pause() {
 	write_to_file "$(get_seconds)" "$PAUSED_FILE"
-	send_notification "🍅 Pomodoro paused!" "Your Pomodoro has been paused"
+	send_notification "🍅 Pomodoro paused!" "Your Pomodoro has been paused" "pause"
 }
 
 pomodoro_resume() {
@@ -242,7 +242,7 @@ pomodoro_resume() {
 
 	remove_file "$PAUSED_FILE"
 	remove_file "$FROZEN_DISPLAY_FILE"
-	send_notification "🍅 Pomodoro resuming!" "Your Pomodoro has resumed"
+	send_notification "🍅 Pomodoro resuming!" "Your Pomodoro has resumed" resume
 }
 
 time_paused_for() {
@@ -286,7 +286,7 @@ pomodoro_start() {
 	fi
 
 	refresh_statusline
-	send_notification "🍅 Pomodoro ${verb}ed!" "Your Pomodoro is underway"
+	send_notification "🍅 Pomodoro ${verb}ed!" "Your Pomodoro is underway" "start"
 	return 0
 }
 
@@ -298,7 +298,7 @@ break_start() {
 	write_to_file "$(get_seconds)" "$START_FILE"
 
 	refresh_statusline
-	send_notification "🍅 Break started!" "Your break is underway"
+	send_notification "🍅 Break started!" "Your break is underway" "break"
 	return 0
 }
 
@@ -309,7 +309,7 @@ pomodoro_cancel() {
 	remove_file "$INTERVAL_FILE"
 
 	if [ "$notification" = true ]; then
-		send_notification "🍅 Pomodoro cancelled!" "Your Pomodoro has been cancelled"
+		send_notification "🍅 Pomodoro cancelled!" "Your Pomodoro has been cancelled" "cancel"
 	fi
 
 	refresh_statusline

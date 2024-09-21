@@ -72,36 +72,24 @@ send_notification() {
 		sound=$(get_sound)
 		export sound_file
 		export sound
-		case "$OSTYPE" in
-		linux* | *bsd*)
+		case "$3" in
+		start | resume | break)
 			notify-send -t 8000 "$title" "$message"
 			if [[ "$sound" == "on" ]]; then
-				if command -v pw-play &>/dev/null && [[ "$sound_file" != "off" ]]; then
-					if [[ -f $sound_file ]]; then
-						echo "pw-play \"$sound_file\"" | at now
-					else
-						sound_file="/usr/share/sounds/freedesktop/stereo/bell.oga"
-						echo "pw-play \"$sound_file\"" | at now
-					fi
-				elif command -v paplay &>/dev/null && [[ "$sound_file" != "off" ]]; then
-					if [[ -f $sound_file ]]; then
-						echo "paplay \"$sound_file\"" | at now
-					else
-						sound_file="/usr/share/sounds/freedesktop/stereo/bell.oga"
-						echo "paplay \"$sound_file\"" | at now
-					fi
-				elif command -v beep &>/dev/null; then
-					beep -D 1500
-				fi
+				cmus-remote -p
 			fi
 			;;
-		darwin*)
-			if [[ "$sound" == "off" ]]; then
-				osascript -e 'display notification "'"$message"'" with title "'"$title"'"'
-			else
-				osascript -e 'display notification "'"$message"'" with title "'"$title"'" sound name "'"$sound"'"'
+		pause)
+			if [[ "$sound" == "on" ]]; then
+				cmus-remote -u
 			fi
 			;;
+		cancel)
+			if [[ "$sound" == "on" ]]; then
+				cmus-remote -s
+			fi
+			;;
+		*) cmus-remote -s ;;
 		esac
 	fi
 }
