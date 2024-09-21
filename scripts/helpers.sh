@@ -75,6 +75,9 @@ send_notification() {
 				notify-send -t 8000 "$title" "$message"
 				if [[ "$sound" == "on" ]]; then
 					cmus-remote -p
+				else
+					sound_file="/usr/share/sounds/freedesktop/stereo/complete.oga"
+					echo "pw-play \"$sound_file\"" | at now
 				fi
 				;;
 			pause)
@@ -87,6 +90,9 @@ send_notification() {
 				notify-send -t 8000 "$title" "$message"
 				if [[ "$sound" == "on" ]]; then
 					cmus-remote -s
+				else
+					sound_file="/usr/share/sounds/freedesktop/stereo/bell.oga"
+					echo "pw-play \"$sound_file\"" | at now
 				fi
 				;;
 			*) 
