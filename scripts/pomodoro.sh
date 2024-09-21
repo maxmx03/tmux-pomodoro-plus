@@ -237,7 +237,7 @@ pomodoro_resume() {
 
 	remove_file "$PAUSED_FILE"
 	remove_file "$FROZEN_DISPLAY_FILE"
-	send_notification "🍅 Pomodoro resuming!" "Your Pomodoro has resumed" resume
+	send_notification "🍅 Pomodoro resuming!" "Your Pomodoro has resumed" "resume"
 }
 
 time_paused_for() {

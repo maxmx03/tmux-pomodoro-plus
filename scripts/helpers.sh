@@ -96,8 +96,9 @@ send_notification() {
 				fi
 				;;
 			*) 
-				notify-send -t 8000 "$title" "$message"
-				cmus-remote -s 
+				sound_file="/usr/share/sounds/freedesktop/stereo/complete.oga"
+				echo "pw-play \"$sound_file\"" | at now
+				cmus-remote -s
 				;;
 		esac
 	fi
