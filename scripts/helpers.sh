@@ -73,23 +73,28 @@ send_notification() {
 		export sound_file
 		export sound
 		case "$3" in
-		start | resume | break)
-			notify-send -t 8000 "$title" "$message"
-			if [[ "$sound" == "on" ]]; then
-				cmus-remote -p
-			fi
-			;;
-		pause)
-			if [[ "$sound" == "on" ]]; then
-				cmus-remote -u
-			fi
-			;;
-		cancel)
-			if [[ "$sound" == "on" ]]; then
-				cmus-remote -s
-			fi
-			;;
-		*) cmus-remote -s ;;
+			start | resume | break)
+				notify-send -t 8000 "$title" "$message"
+				if [[ "$sound" == "on" ]]; then
+					cmus-remote -p
+				fi
+				;;
+			pause)
+				notify-send -t 8000 "$title" "$message"
+				if [[ "$sound" == "on" ]]; then
+					cmus-remote -u
+				fi
+				;;
+			cancel)
+				notify-send -t 8000 "$title" "$message"
+				if [[ "$sound" == "on" ]]; then
+					cmus-remote -s
+				fi
+				;;
+			*) 
+				notify-send -t 8000 "$title" "$message"
+				cmus-remote -s 
+				;;
 		esac
 	fi
 }
