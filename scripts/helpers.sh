@@ -68,9 +68,7 @@ send_notification() {
 	if [ "$(get_notifications)" == 'on' ]; then
 		local title=$1
 		local message=$2
-		sound_file=$(get_sound_file)
 		sound=$(get_sound)
-		export sound_file
 		export sound
 		case "$3" in
 			start | resume | break)

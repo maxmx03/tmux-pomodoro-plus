@@ -40,7 +40,6 @@ pomodoro_prompt_pomodoro_default=" ⏱︎ start?"
 pomodoro_interval_display="@pomodoro_interval_display"
 
 pomodoro_sound="@pomodoro_sound"
-pomodoro_sound_file="@pomodoro_sound_file"
 pomodoro_notifications="@pomodoro_notifications"
 pomodoro_granularity="@pomodoro_granularity"
 pomodoro_disable_breaks="@pomodoro_disable_breaks"
@@ -91,10 +90,6 @@ get_pomodoro_granularity() {
 
 get_sound() {
 	get_tmux_option "$pomodoro_sound" "off"
-}
-
-get_sound_file() {
-	get_tmux_option "$pomodoro_sound_file" "off"
 }
 
 format_seconds() {
