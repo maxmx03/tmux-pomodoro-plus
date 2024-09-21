@@ -71,7 +71,7 @@ send_notification() {
 		sound=$(get_sound)
 		export sound
 		case "$3" in
-			start | resume | break)
+			start | resume)
 				notify-send -t 8000 "$title" "$message"
 				if [[ "$sound" == "on" ]]; then
 					cmus-remote -p
@@ -80,7 +80,7 @@ send_notification() {
 					echo "pw-play \"$sound_file\"" | at now
 				fi
 				;;
-			pause)
+			pause | break)
 				notify-send -t 8000 "$title" "$message"
 				if [[ "$sound" == "on" ]]; then
 					cmus-remote -u
