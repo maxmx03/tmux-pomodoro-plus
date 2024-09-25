@@ -69,15 +69,16 @@ send_notification() {
 		local title=$1
 		local message=$2
 		sound=$(get_sound)
-		export sound
+		notification=$(get_notification)
+		export sound notification
 		case "$3" in
 			start | resume)
 				notify-send -t 8000 "$title" "$message"
 				if [[ "$sound" == "on" ]]; then
 					cmus-remote -p
 				else
-					sound_file="/usr/share/sounds/freedesktop/stereo/complete.oga"
-					echo "pw-play \"$sound_file\"" | at now
+					[[ $notification == "off" ]] && notification="/usr/share/sounds/freedesktop/stereo/complete.oga"
+					echo "pw-play \"$notification\"" | at now
 				fi
 				;;
 			pause | break)
@@ -91,13 +92,13 @@ send_notification() {
 				if [[ "$sound" == "on" ]]; then
 					cmus-remote -s
 				else
-					sound_file="/usr/share/sounds/freedesktop/stereo/bell.oga"
-					echo "pw-play \"$sound_file\"" | at now
+					[[ $notification == "off" ]] && notification="/usr/share/sounds/freedesktop/stereo/complete.oga"
+					echo "pw-play \"$notification\"" | at now
 				fi
 				;;
 			*) 
-				sound_file="/usr/share/sounds/freedesktop/stereo/complete.oga"
-				echo "pw-play \"$sound_file\"" | at now
+				[[ $notification == "off" ]] && notification="/usr/share/sounds/freedesktop/stereo/complete.oga"
+				echo "pw-play \"$notification\"" | at now
 				cmus-remote -s
 				;;
 		esac
